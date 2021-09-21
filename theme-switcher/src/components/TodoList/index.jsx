@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const List = styled.ul`
-  background: #333;
-  color: #fff;
+  background: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.color};
   font-family: sans-serif;
   font-size: 18px;
 
@@ -12,9 +12,8 @@ const List = styled.ul`
   }
 `;
 
-const TodoList = ({theme}) => (
+const TodoList = () => (
   <List>
-    {console.log(theme)}
     <li>Fazer Café</li>
     <li>Entrar na comunidade da Rocketseat</li>
     <li>Estudar ReactJS</li>
