@@ -1,10 +1,12 @@
-import './App.css';
-import * as themes from './styles/themes';
+import React, { useState } from 'react';
 
+import { ThemeProvider } from 'styled-components';
+
+import * as themes from './styles/themes';
 import TodoList from './components/TodoList';
 import ThemeSwitcher from './components/ThemeSwitcher';
 import ThemeContext from './styles/themes/context';
-import { useState } from 'react';
+
 
 function App() {
   const [currentTheme, setCurrentTheme] = useState(themes.dark);
@@ -19,7 +21,10 @@ function App() {
       <ThemeContext.Provider value={currentTheme}>
       <ThemeSwitcher toggleTheme={toggleTheme}/>
         <ThemeContext.Consumer>
-          {(theme) => <TodoList theme={theme}/>}
+          {(theme) => 
+          <ThemeProvider theme={theme}> 
+            <TodoList/> 
+          </ThemeProvider>}
         </ThemeContext.Consumer>
       </ThemeContext.Provider>
     </div>
