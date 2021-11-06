@@ -1,54 +1,15 @@
 import React from 'react';
 //import { Component } from 'react';
 /* import P from 'prop-types';*/
-import { useContext, useState } from 'react';
+import { AppContext } from './store/GlobalContext';
+import Div from './components/Div/index';
 import './App.css';
 
-const globalState = {
-  //Equivale ao useState
-  title: 'O título que contexto',
-  body: 'Seja bem-vindo ao contexto',
-  counter: 0,
-};
-
-const GlobalContext = React.createContext();
-
-const Div = () => {
-  return (
-    <div className="app">
-      <H1 />
-      <P />
-    </div>
-  );
-};
-const H1 = () => {
-  const context = useContext(GlobalContext);
-  const {
-    contextState: { title, counter },
-  } = context;
-  return (
-    <h1>
-      {title} {counter}
-    </h1>
-  );
-};
-const P = () => {
-  const context = useContext(GlobalContext);
-  const {
-    //Destructing mais avançado, tira um atributo de dentro do objeto
-    contextState: { body, counter },
-    contextState,
-    setContextState,
-  } = context;
-  return <p onClick={() => setContextState({ ...contextState, counter: counter + 1 })}>{body}</p>;
-};
-
 function App() {
-  const [contextState, setContextState] = useState(globalState);
   return (
-    <GlobalContext.Provider value={{ contextState, setContextState }}>
+    <AppContext>
       <Div></Div>
-    </GlobalContext.Provider>
+    </AppContext>
   );
 }
 
