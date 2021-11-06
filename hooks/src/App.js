@@ -1,40 +1,54 @@
+import React from 'react';
 //import { Component } from 'react';
-import { useEffect, useState } from 'react';
+/* import P from 'prop-types';*/
+import { useContext, useState } from 'react';
 import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0);
+const globalState = {
+  //Equivale ao useState
+  title: 'O título que contexto',
+  body: 'Seja bem-vindo ao contexto',
+  counter: 0,
+};
 
-  //ComponentDidMount - Executa uma vez
-  useEffect(() => {
-    console.log('ComponentDidMount');
-  }, []);
-  //ComponentDidUpdate - A cada atualização
-  useEffect(() => {
-    console.log('Atualizando');
-  });
+const GlobalContext = React.createContext();
 
-  //Com Dependências - Executa toda vez que a dependência mudar
-  useEffect(() => {
-    console.log('Atualizando com Dependência', count);
-
-    //Papel do componentWillUmount - Limpeza
-    /* return () => {
-
-    }; */
-  }, [count]);
-
-  const handleClick = () => {
-    setCount((count) => count + 1);
-  };
+const Div = () => {
   return (
-    <div className="App">
-      <h1>Contador: {count}</h1>
-
-      <button type="button" onClick={handleClick}>
-        +
-      </button>
+    <div className="app">
+      <H1 />
+      <P />
     </div>
+  );
+};
+const H1 = () => {
+  const context = useContext(GlobalContext);
+  const {
+    contextState: { title, counter },
+  } = context;
+  return (
+    <h1>
+      {title} {counter}
+    </h1>
+  );
+};
+const P = () => {
+  const context = useContext(GlobalContext);
+  const {
+    //Destructing mais avançado, tira um atributo de dentro do objeto
+    contextState: { body, counter },
+    contextState,
+    setContextState,
+  } = context;
+  return <p onClick={() => setContextState({ ...contextState, counter: counter + 1 })}>{body}</p>;
+};
+
+function App() {
+  const [contextState, setContextState] = useState(globalState);
+  return (
+    <GlobalContext.Provider value={{ contextState, setContextState }}>
+      <Div></Div>
+    </GlobalContext.Provider>
   );
 }
 
