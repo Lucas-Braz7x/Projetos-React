@@ -1,12 +1,12 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 //import { Component } from 'react';
 /* import P from 'prop-types';*/
-/* import { AppContext } from './store/GlobalContext';
-import Div from './components/Div/index'; */
+import { AppContext } from './store/GlobalContext';
+import Div from './components/Div/index';
 import './App.css';
-import { globalState } from './store/globalState';
+//import { globalState } from './store/globalState';
 
-const reducer = (state, action) => {
+/* const reducer = (state, action) => {
   switch (action.type) {
     case 'muda':
       console.log('Data ', action.payload);
@@ -17,31 +17,31 @@ const reducer = (state, action) => {
       return { ...state, title: title.split('').reverse().join('') };
     }
   }
-};
+}; */
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, globalState);
-  const { counter, title, body } = state;
+  /* const [state, dispatch] = useReducer(reducer, globalState);
+  const { counter, title, body } = state; */
   return (
-    /* <AppContext>
+    <AppContext>
       <Div></Div>
-    </AppContext> */
-    <div>
-      <h1>{title}</h1>
-      <p>{counter}</p>
-      <p>{body}</p>
-      <button
-        onClick={() =>
-          dispatch({
-            type: 'muda',
-            payload: new Date().toLocaleDateString('pt-br'),
-          })
-        }
-      >
-        Mudar
-      </button>
-      <button onClick={() => dispatch({ type: 'inverter' })}>Inverter</button>
-    </div>
+    </AppContext>
+    /* <div>
+    <h1>{title}</h1>
+    <p>{counter}</p>
+    <p>{body}</p>
+    <button
+      onClick={() =>
+        dispatch({
+          type: 'muda',
+          payload: new Date().toLocaleDateString('pt-br'),
+        })
+      }
+    >
+      Mudar
+    </button>
+    <button onClick={() => dispatch({ type: 'inverter' })}>Inverter</button>
+  </div> */
   );
 }
 

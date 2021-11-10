@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+/* import { useContext } from 'react';
 import { GlobalContext } from '../../store/GlobalContext';
 
 const P = () => {
@@ -13,3 +13,4 @@ const P = () => {
 };
 
 export default P;
+ */
