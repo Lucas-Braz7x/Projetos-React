@@ -12,3 +12,6 @@ Repositório criado para alocar pequenos projetos e funcionalidades feitas com r
   top: auto;
   overflow: hidden;
 }
+
+http://www.w3.org/WAI/
+https://developer.mozilla.org/en-US/docs/Web/Accessibility?redirectlocale=en-US&redirectslug=Accessibility
