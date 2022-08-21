@@ -5,6 +5,7 @@ import {
   TeamOutlined,
   UserOutlined,
 } from '@ant-design/icons';
+
 import { MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu } from 'antd';
 import React, { useState } from 'react';
@@ -42,19 +43,41 @@ const items: MenuItem[] = [
 
 export const Home = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const [user, setUser] = useState('Bill');
+  const [group, setGroup] = useState('User');
+
+  const handleMenuClicked = (e: any) => {
+    const menuValue = e.domEvent.currentTarget.dataset.menuId;
+
+    const userExp = new RegExp('[3-5]$');
+    const teamExp = new RegExp('[6-8]$');
+
+    if (userExp.test(menuValue)) {
+      setGroup('User')
+      setUser(e.domEvent.currentTarget.textContent);
+    }
+
+    if (teamExp.test(menuValue)) {
+      setGroup('Team');
+      setUser(e.domEvent.currentTarget.textContent);
+    }
+  }
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={value => setCollapsed(value)}>
         <div className="logo" />
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+        <Menu theme="light" defaultSelectedKeys={['1']} mode="inline" items={items}
+          /* onClick={(e) => console.log(e.domEvent.currentTarget.textContent)} */
+          onClick={handleMenuClicked}
+        />
       </Sider>
       <Layout className="site-layout">
         <Header className="site-layout-background" style={{ padding: 0 }} />
         <Content style={{ margin: '0 16px' }}>
           <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
+            <Breadcrumb.Item>{group}</Breadcrumb.Item>
+            <Breadcrumb.Item>{user}</Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
             <FormComponent />

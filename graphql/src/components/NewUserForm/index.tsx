@@ -1,9 +1,7 @@
 import { gql, useMutation } from '@apollo/client';
 import { FormEvent, useState } from 'react'
-import { useRecoilState } from 'recoil';
 import { GET_USERS } from '../../App';
 import { client } from '../../lib/apollo';
-import { ITestState, testState } from '../../store/states';
 
 const CREATE_USER = gql`
   mutation ($name: String!){
@@ -15,7 +13,7 @@ const CREATE_USER = gql`
 `
 
 export const NewUserForm = () =>{
-  const [test] = useRecoilState<ITestState[]>(testState);
+
   const [name, setName] = useState("");
   const [createUser, {data, loading, error}] = useMutation(CREATE_USER);
 
@@ -48,14 +46,9 @@ export const NewUserForm = () =>{
     })
   }
   return(
-    <>
       <form method='post' action="" onSubmit={handleCreateUser}>
         <input type="text" onChange={e => setName(e.target.value)}/>
         <button type='submit'>Enviar</button>
       </form>
-      <ul>
-        {test?.map((test: any, index: number) => <li key={index}>{test.title}</li>)}
-      </ul>
-    </>
   )
 }

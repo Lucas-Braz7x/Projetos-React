@@ -2,6 +2,7 @@ import { gql, useQuery } from '@apollo/client';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { NewUserForm } from './components/NewUserForm';
+import { TestRecoil } from './components/testRecoil';
 import { ITestState, testState } from './store/states';
 
 interface IUser{
@@ -37,6 +38,7 @@ function App() {
       </ul>
       <NewUserForm />
       <button onClick={handleTest}>TESTE</button>
+      <TestRecoil />
     </>
   );
 }
